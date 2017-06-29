@@ -1,9 +1,9 @@
 <?php
 
-$greeting = $_POST['greeting'];
+$i = $_POST['greeting'];
 $number = $_POST['number'];
 
-for ($greeting = 1; $greeting <= $number; $greeting++) {
+for ($i = 0; $i < $number; $i++) {
 	echo "".$_POST['greeting']."<br>";
 }
 ?>
