@@ -15,7 +15,7 @@ foreach ($customers as $c) {
 	echo "Remaining " . $totalTissue . "<br>";	
 }
 
-	echo "Remaining tissue at the end of the day: " . $totalTissue . "<br>";
+	echo "Remaining tissue at the end of the day: " . $totalTissue . "<br>"; //change
 
 ?>
 
