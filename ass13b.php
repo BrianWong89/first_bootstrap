@@ -25,12 +25,12 @@ foreach ($response as $member) {
 	for ($i=0; $i < strlen($x); $i++) {
 		if ($x[$i] == "w") {
 			$w++;
-			echo "<tr>\r\n";
-			echo "<td>".$member['domain']."</td>\r\n";
-			echo "<td>".$w."</td>\r\n";
-			echo "<td>".$member['country']."</td>\r\n";
 		}
 	}
+echo "<tr>\r\n";
+echo "<td>".$member['domain']."</td>\r\n";
+echo "<td>".$w."</td>\r\n";
+echo "<td>".$member['country']."</td>\r\n";
 $w = 0;	
 }
 
