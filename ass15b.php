@@ -30,11 +30,10 @@ foreach ($response_array as $member) {
 			if ($y['type'] == "add") {
 				$AddedValue+=$y['value'];
 				$CumulativeSalary=array_sum($member['salary'])+$AddedValue;
-				if ($y['type'] == "subtract") {
-					$CumulativeBills+=array_sum($y['value']);
-				}
-				
 			}
+				if ($y['type'] == "subtract") {
+					$CumulativeBills+=$y['value'];
+				}
 		}
 	}
 echo "<tr>\r\n";
@@ -42,6 +41,7 @@ echo "<td>".$fullname."</td>\r\n";
 echo "<td>".$CumulativeSalary."</td>\r\n";
 echo "<td>".($CumulativeSalary-$CumulativeBills)."</td>\r\n";
 $CumulativeSalary=0;
+$AddedValue=0;
 $CumulativeBills=0;
 }
 
