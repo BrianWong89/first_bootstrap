@@ -16,7 +16,7 @@ curl_close($ch);
 $response=json_decode($response,true);
 
 echo "<table border='1'>\r\n";
-echo "<tr>\r\n<th>Domain</th><th>No of Ws</th><th>Country</th></tr>\r\n";
+echo "<tr>\r\n<th>Domain</th><th>No of w</th><th>Country</th></tr>\r\n";
 
 $w = 0;
 
