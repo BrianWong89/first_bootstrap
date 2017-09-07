@@ -15,6 +15,7 @@ $response = curl_exec($ch);
 curl_close($ch);
 
 $response_array=json_decode($response,true);
+print_r($response_array);
 
 $CumulativeSalary=0;
 $CumulativeBills=0;
@@ -26,23 +27,24 @@ echo "<tr>\r\n<th>Name</th><th>Cumulative Salary</th><th>Cumulative Salary after
 foreach ($response_array as $member) {
 	$fullname=$member['name']." ".$member['surname'];
 	foreach ($member['children'] as $c) {
+		
 		foreach ($c['transactions'] as $y) {
 			if ($y['type'] == "add") {
 				$AddedValue+=$y['value'];
-				$CumulativeSalary=array_sum($member['salary'])+$AddedValue;
 			}
-				if ($y['type'] == "subtract") {
-					$CumulativeBills+=$y['value'];
-				}
+			if ($y['type'] == "subtract") {
+				$CumulativeBills+=$y['value'];
+			}
 		}
 	}
-echo "<tr>\r\n";
-echo "<td>".$fullname."</td>\r\n";
-echo "<td>".$CumulativeSalary."</td>\r\n";
-echo "<td>".($CumulativeSalary-$CumulativeBills)."</td>\r\n";
-$CumulativeSalary=0;
-$AddedValue=0;
-$CumulativeBills=0;
+	$CumulativeSalary=array_sum($member['salary'])+$AddedValue;
+	echo "<tr>\r\n";
+	echo "<td>".$fullname."</td>\r\n";
+	echo "<td>".$CumulativeSalary."</td>\r\n";
+	echo "<td>".($CumulativeSalary-$CumulativeBills)."</td>\r\n";
+	$CumulativeSalary=0;
+	$AddedValue=0;
+	$CumulativeBills=0;
 }
 
 ?>
