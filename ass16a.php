@@ -19,37 +19,31 @@ $response_array=json_decode($response,true);
 
 $healthPoints=100;
 $manaPoints=100;
-$cumulativeHP=0;
-$cumulativeMP=0;
-$remainingHP=0;
-$remainingMP=0;
 
 echo "<table border='1'>\r\n";
 echo "<tr>\r\n<th>Spell</th><th>Current HP</th><th>Current MP</th>\r\n</tr>\r\n";
 
-foreach ($response_array as $member) {
-	if ($member['type'] == "damage-spell") {
-		$cumulativeHP-=$member['hp'];
-		$remainingHP=($healthPoints-$cumulativeHP);
-		$remainingMP=($manaPoints-$cumulativeMP);
-	}
-	if ($member['type'] == "heal-spell") {
-		$cumulativeHP-=$member['hp'];
-	    $cumulativeMP+=$member['mana'];
-		$remainingHP=($healthPoints-$cumulativeHP);
-		$remainingMP=($manaPoints-$cumulativeMP);
+foreach ($response_array as $spell) {
+	if ($spell['type'] == "damage-spell") {
+		$healthPoints+=$spell['hp'];
 		
 	}
-	if ($member['type'] == "fireball") {
-		$cumulativeMP-=$member['mana'];
-		$remainingHP=($healthPoints-$cumulativeHP);
-		$remainingMP=($manaPoints-=$cumulativeMP);
+	if ($spell['type'] == "heal-spell") {
+		$healthPoints+=$spell['hp'];
+		$manaPoints+=$spell['mana'];	
 	}
-echo "<tr>\r\n";
-echo "<td>".$member['type']."</td>\r\n";
-echo "<td>$remainingHP</td>\r\n";
-echo "<td>$remainingMP</td>\r\n";
+	if ($spell['type'] == "fireball") {
+		$manaPoints+=$spell['mana'];
+	}
+	echo "<tr>\r\n";
+	echo "<td>".$spell['type']."</td>\r\n";
+	echo "<td>".$healthPoints."</td>\r\n";
+	echo "<td>".$manaPoints."</td>\r\n";
+	echo "</tr>\r\n";
 }
-echo "You currently have $remainingHP health points and $remainingMP mana points.";
+
+echo "</table>";
+
+echo "You currently have $healthPoints health points and $manaPoints mana points.";
 
 ?>
