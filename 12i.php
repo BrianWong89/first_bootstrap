@@ -8,7 +8,7 @@ $post = [
     'action' => 'listSavings',
 ];
 
-$ch = curl_init('http://www.alphis.net/deposit.php');
+$ch = curl_init('http://www.alphis.net/family_worth.php');
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
 
@@ -28,25 +28,29 @@ curl_close($ch);
 //The true in the command changes the json response to array format.
 $response_array=json_decode($response,true);
 
-print_r($response_array);
+//print_r($response_array);
 
 //As mentioned, i've told you that print_r() is a very important command. Sometimes, you just need to print_r to see what's in the array, before deciding how you want to program.
-
-//Now, write the necessary code to tell me who earns the most.
-
+				
 $name="";
-$deposits=0;
-
+$highestNetWorth=0;			
+				
 foreach ($response_array as $member) {
-	for ($i = 0; $i < sizeof($member['deposits']); $i++) {
-		if ($member['deposits'][$i] > $deposits) {
-			$deposits=$member['deposits'][$i];
-			$name=$member['name'];
-		
-		}
+	$totalSavings=array_sum($member['accumulated_savings']);
+	$totalDebts=0;
+	foreach ($member['children'] as $c) {
+		$totalSavings+=array_sum($c['accumulated_savings']);
 	}
+	foreach ($member['debts'] as $d) {
+		$totalDebts+=$d;
+	}
+	$netWorth=$totalSavings-$totalDebts;
+		if ($highestNetWorth < $netWorth) {
+		$highestNetWorth = $netWorth;
+		$name=$member['name'];
+		}				
 }
 
-echo $name. " has the most deposit of $" .$deposits;
-		
+echo $name. " is the richest with a net worth of $" .$netWorth.".";
+				
 ?>

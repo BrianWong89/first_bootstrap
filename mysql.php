@@ -20,15 +20,15 @@ if (mysqli_num_rows($result) > 0) {
     while($row = mysqli_fetch_assoc($result)) {
 		
 		
-		if(username = "Brian" AND password = "Password") {
-			echo "login successful;
+		if($row["age"] >= 29) {
+			echo "id: " . $row["id"]. " - Username: " . $row["username"]. " Password: " . $row["password"]. "<br>";
 
 		}
 		
 		
     }
 } else {
-    echo "login unsucessful;";
+    echo "0 results";
 }
 
 mysqli_close($conn);
