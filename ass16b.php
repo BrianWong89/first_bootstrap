@@ -24,12 +24,27 @@ $manaPoints=100;
 echo "<table border='1'>\r\n";
 echo "<tr>\r\n<th>Spell</th><th>Current HP</th><th>Current MP</th>\r\n</tr>\r\n";
 
-foreach ($response_array as $member){
-	
+foreach ($response_array as $spell){
+	if ($spell['type'] == "damage-spell") {
+		$healthPoints+=$spell['hp'];
+	}
+	if ($spell['type'] == "heal-spell") {
+		$healthPoints+=$spell['hp'];
+		$manaPoints+=$spell['mana'];	
+	}
+	if ($spell['type'] == "fireball") {
+		$manaPoints+=$spell['mana'];
+	}
+	echo "<tr>\r\n";
+	echo "<td>".$spell['type']."</td>\r\n";
+	echo "<td>".$healthPoints."</td>\r\n";
+	echo "<td>".$manaPoints."</td>\r\n";
+	if ($healthPoints <= 0) {
+		break;
+	}
+	echo "</tr>\r\n";
 }
+echo "</table>";
 
-//if () {
-	//echo "You have died instantly.";
-//}
-
+echo "You have died instantly.";
 ?>
