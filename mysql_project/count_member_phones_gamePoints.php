@@ -16,6 +16,7 @@ echo "<tr>\r\n<th>Member ID</th><th>Name</th><th>Number of Phones</th><th>Number
 $numberOfPhones = 0;
 $totalGamePoints = 0;
 foreach ($results as $member) {
+    //print_r(members);
     $numberOfPhones = 0;
     $phoneNumbers = DB::query("SELECT * FROM `members_phones` WHERE member_id = %i", $member['id']);
     foreach ($phoneNumbers as $phoneNumber) {
