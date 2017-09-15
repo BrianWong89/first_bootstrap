@@ -38,5 +38,3 @@ foreach ($results as $member) {
 echo "</table>";
 
 ?>
-
-
