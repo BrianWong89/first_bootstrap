@@ -19,13 +19,15 @@ foreach ($results as $member) {
         $member["gamepoints"] = array();
         //print_r($phoneNumber);
         array_push($member["handphones"], $phoneNumber['phone_number']);
-        $gamePoints = DB::query("SELECT * FROM `members_game_points` WHERE member_id = %i", $member['id']);
-        foreach ($gamePoints as $gamePoint) {
-            array_push($member["gamepoints"], $gamePoint['game_points']);
-            $member["totalGamePoints"] = ($totalGamePoints += $gamePoint['game_points']);
-        }
-        $totalGamePoints = 0;
     }
+    $gamePoints = DB::query("SELECT * FROM `members_game_points` WHERE member_id = %i", $member['id']);
+    foreach ($gamePoints as $gamePoint) {
+        array_push($member["gamepoints"], $gamePoint['game_points']);
+        $totalGamePoints += $gamePoint['game_points'];
+    }
+    $member["totalGamePoints"] = $totalGamePoints;
+
+    $totalGamePoints = 0;
     array_push($return["members"], $member);
 }
 echo json_encode($return, JSON_PRETTY_PRINT);
