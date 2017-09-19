@@ -8,6 +8,7 @@
 require_once("vendor/autoload.php");
 $return = array();
 $return["members"] = array();
+$return["totalGamePoints"] = 0;
 $results = DB::query("SELECT * FROM `members`");
 foreach ($results as $member) {
     $member["handphones"] = array();
