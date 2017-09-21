@@ -2,11 +2,15 @@
 require("header.php");
 ?>
 
-<div class="container">
+    <div class="container">
 
-<div class="jumbotron">
-    <h1>Simple bootstrap page</h1>
-    <p>Test page.</p>
-</div>
+        <div class="jumbotron">
+            <h1>Simple bootstrap page</h1>
+            <p>Test page.</p>
+        </div>
 
-</div>
+    </div>
+
+<?php
+require("footer.php");
+?>
