@@ -24,8 +24,6 @@
     <![endif]-->
 </head>
 
-<body>
-
 <div class="container">
 
     <!-- Static navbar -->
@@ -50,6 +48,3 @@
     </nav>
 
 </div> <!-- /container -->
-
-</body>
-</html>

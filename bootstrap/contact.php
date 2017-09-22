@@ -1,34 +1,48 @@
 <?php
 require("header.php");
+$showForm = true;
+//print_r($_POST);
 ?>
-
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="../bootstrap/bower_components/bootstrap/dist/css/bootstrap.min.css">
-        <script src="../bootstrap/bower_components/jquery/dist/jquery.min.js"></script>
-        <script src="../bootstrap/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    </head>
-    <body>
 
     <div class="container">
         <h2>Contact us</h2>
-        <form action="contact_form.php" method="post">
-            <div class="form-group">
-                <label for="email">Email:</label>
-                <input type="email" class="form-control" id="email" placeholder="Enter email">
-            </div>
-            <div class="form-group">
-                <label for="message">Message:</label>
-                <input type="message" class="form-control" id="message" placeholder="Enter message">
-            </div>
-            <button type="button" class="btn btn-success btn-block">Submit</button>
-        </form>
+        <?php if (isset($_POST["email"]) && isset($_POST["message"])) { ?>
+            <?php if ($_POST["email"] == "" || $_POST["message"] == "") { ?>
+                <div class="alert alert-danger">
+                    <strong> Warning! Please enter a valid email address or message!</strong>
+                </div>
+            <?php } else { ?>
+
+                Your email is: <?php echo $_POST["email"]; ?><br>
+                Your message is: <?php echo $_POST["message"]; ?>
+
+                <div class="alert alert-success">
+                    <strong>Success! Your message has been sent.</strong>
+                </div>
+                <?php $showForm = false;
+
+            }
+        }?>
+        <?php if ($showForm == true) { ?>
+
+            <form action="contact.php" method="post">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="text" class="form-control" id="email" name="email"
+                           value="<?php if (isset($_POST['email'])) echo $_POST["email"];  ?>"
+                           placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                    <label for="message">Message:</label>
+                    <input type="text" class="form-control" id="message" name="message"
+                           value="<?php if (isset($_POST['message'])) echo $_POST["message"]; ?>"
+                           placeholder="Enter message">
+                </div>
+                <button type="submit" class="btn btn-success btn-block">Submit</button>
+            </form>
+        <?php } ?>
     </div>
 
-    </body>
-    </html>
 
 <?php
 require("footer.php");
