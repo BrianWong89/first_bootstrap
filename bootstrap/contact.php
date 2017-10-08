@@ -22,14 +22,14 @@ $showForm = true;
                 <?php $showForm = false;
 
             }
-        }?>
+        } ?>
         <?php if ($showForm == true) { ?>
 
             <form action="contact.php" method="post">
                 <div class="form-group">
                     <label for="email">Email:</label>
                     <input type="text" class="form-control" id="email" name="email"
-                           value="<?php if (isset($_POST['email'])) echo $_POST["email"];  ?>"
+                           value="<?php if (isset($_POST['email'])) echo $_POST["email"]; ?>"
                            placeholder="Enter email">
                 </div>
                 <div class="form-group">
